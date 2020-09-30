@@ -3,3 +3,6 @@ venv
 *.pyc
 *.sqlite3
 __pycache__/
+config.py
+settings1.py
+migrations/

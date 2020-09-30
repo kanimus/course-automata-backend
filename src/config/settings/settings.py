@@ -1,25 +1,22 @@
-from pathlib import Path
 import os
+from .config import *
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = '&)^$&+t76#6(9w^sy@g^-go001g=uh4q57_p1wn*l4_0**00ay'
-
-
-DEBUG = True
-
-ALLOWED_HOSTS = ['127.0.0.1']
-
+# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.messages',
+
+    'apps.user'
 ]
 
 MIDDLEWARE = [
@@ -32,7 +29,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'course_helper.urls'
+
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -50,16 +48,34 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'course_helper.wsgi.application'
 
+WSGI_APPLICATION = 'config.wsgi.application'
+
+
+AUTH_USER_MODEL = 'user.User'
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'apps.identity_module.authentication.JWTAuthentication',
+    )
+}
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': ENGINE,
+        'NAME': NAME_DB,
+        'USER': USER_NAME,
+        'PASSWORD': USER_PW,
+        'HOST': HOST,
+        'PORT': PORT,
     }
 }
 
+
+
+# Password validation
+# https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -77,6 +93,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# Internationalization
+# https://docs.djangoproject.com/en/3.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
@@ -88,5 +106,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
+
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)
