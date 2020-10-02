@@ -1,5 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
+
+from .managers import CustomUserManager
 
 
 class School(models.Model):
@@ -7,15 +10,31 @@ class School(models.Model):
     short_name = models.CharField(max_length=10, verbose_name="Short name")
 
     def __str__(self):
-        return self.name
+        return self.short_name
 
     class Meta:
         verbose_name = 'School'
         verbose_name_plural = 'Schools'
 
 
-class User(AbstractUser):
-    google_id = models.IntegerField()
+class User(AbstractBaseUser, PermissionsMixin):
+    school = models.ForeignKey(School, on_delete=models.CASCADE)
+    user_school_id = models.IntegerField()
+    login = models.CharField(max_length=120, verbose_name="User school login")
+    password = models.CharField(max_length=120, verbose_name="User school password")
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+
+    objects = CustomUserManager()
+
+    USERNAME_FIELD = 'id'
+
+    # @property
+    # def isAuthenticated(self):
+    #     return True if self.auth_id else False
+
+    def __str__(self):
+        return self.login
 
     class Meta:
         verbose_name = 'User'
@@ -24,14 +43,7 @@ class User(AbstractUser):
 
 class Auth(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    school = models.ForeignKey(School, on_delete=models.CASCADE)
-    user_school_id = models.IntegerField()
-    login = models.CharField(max_length=120, verbose_name="User school login")
-    password = models.CharField(max_length=120, verbose_name="User school password")
-    isAuthenticated = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.login
+    google_id = models.IntegerField()
 
     class Meta:
         verbose_name = 'Auth'
