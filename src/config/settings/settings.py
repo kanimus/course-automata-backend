@@ -1,4 +1,3 @@
-import os
 from .config import *
 
 
@@ -17,6 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
 
     'rest_framework.authtoken',
+    'rest_framework',
 
     'apps.user'
 ]
@@ -57,11 +57,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 AUTH_USER_MODEL = 'user.User'
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'apps.identity_module.authentication.JWTAuthentication',
-    )
-}
 
 DATABASES = {
     'default': {

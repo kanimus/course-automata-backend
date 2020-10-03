@@ -18,8 +18,8 @@ class School(models.Model):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    school = models.ForeignKey(School, on_delete=models.CASCADE)
-    user_school_id = models.IntegerField()
+    school = models.ForeignKey(School, on_delete=models.CASCADE, null=True)
+    user_school_id = models.IntegerField(default=0)
     login = models.CharField(max_length=120, verbose_name="User school login")
     password = models.CharField(max_length=120, verbose_name="User school password")
     is_staff = models.BooleanField(default=False)
@@ -43,7 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Auth(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    google_id = models.IntegerField()
+    google_id = models.IntegerField(null=True)
 
     class Meta:
         verbose_name = 'Auth'

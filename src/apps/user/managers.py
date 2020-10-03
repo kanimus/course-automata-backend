@@ -11,8 +11,8 @@ class CustomUserManager(BaseUserManager):
         """
         Create and save a User with the given email and password.
         """
-        if not extra_fields['login']:
-            raise ValueError(_('The login must be set'))
+        # if not extra_fields['login']:
+        #     raise ValueError(_('The login must be set'))
         user = self.model(**extra_fields)
         user.set_password(password)
         user.save()
