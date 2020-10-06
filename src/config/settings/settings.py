@@ -1,5 +1,5 @@
 from .config import *
-
+from config.user.config import TOKEN_AUTH
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,6 +17,7 @@ INSTALLED_APPS = [
 
     'rest_framework.authtoken',
     'rest_framework',
+    'drf_yasg',
 
     'apps.user'
 ]
@@ -70,6 +71,19 @@ DATABASES = {
 }
 
 
+# rest framework settings
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'apps.user.authentication.TokenAuthSupportCookie',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -89,6 +103,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Swagger settings
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+   }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -114,3 +137,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
+
+
