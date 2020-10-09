@@ -1,0 +1,2 @@
+TOKEN_AUTH = 'token'
+SECURE_COOKIE = False
