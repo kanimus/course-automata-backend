@@ -14,9 +14,9 @@ ALLOWED_HOSTS = ['*']
 
 # BD configurations
 ENGINE = 'django.db.backends.postgresql_psycopg2'
-NAME_DB = get_env_or_default('NAME_DB', 'course')
-USER_NAME = get_env_or_default('USER_NAME', 'course')
-USER_PW = get_env_or_default('USER_PW', 'course')
-HOST = get_env_or_default('HOST', 'localhost')
+NAME_DB = get_env_or_default('NAME_DB', 'postgres')
+USER_NAME = get_env_or_default('USER_NAME', 'postgres')
+USER_PW = get_env_or_default('USER_PW', 'postgres')
+HOST = get_env_or_default('HOST', 'db')
 PORT = get_env_or_default('PORT', '5432')
 
