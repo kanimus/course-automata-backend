@@ -2,8 +2,9 @@
   "auths": [
     {
       "auth_id": 1,
-      "input_login": {
-        "on_element_event": {
+      "input_login": [
+        {
+          "data_event_type": "on_element_event",
           "selector": "#loginForm>form",
           "event": "submit",
           "event_data_selector": {
@@ -16,9 +17,10 @@
             }
           }
         }
-      },
-      "input_password": {
-        "on_element_event": {
+      ],
+      "input_password": [
+        {
+          "data_event_type": "on_element_event",
           "selector": "#loginForm>form",
           "event": "submit",
           "event_data_selector": {
@@ -31,9 +33,10 @@
             }
           }
         }
-      },
-      "login_success": {
-        "on_request_event": {
+      ],
+      "login_success": [
+        {
+          "data_event_type": "on_request_event",
           "url_pattern": "https://accounts.tsu.ru/Account/Login*",
           "event": "onBeforeRedirect",
           "event_filter": [
@@ -54,11 +57,12 @@
             "by_const": true
           }
         }
-      },
-      "school_user_id": {
-        "on_request_event": {
-          "url_pattern": "https://accounts.tsu.ru/Profile/Index/*",
-          "event": "onCompleted",
+      ],
+      "school_user_id": [
+        {
+          "data_event_type": "on_request_event",
+          "url_pattern": "https://moodle.tsu.ru/login/accounts_tsu/login_confirm.php?accountId=*",
+          "event": "onBeforeRedirect",
           "event_filter": [
             {
               "data_selector": {
@@ -70,29 +74,45 @@
               "data_selector": {
                 "by_object_property": "statusCode"
               },
-              "equal": 200
-            }
-          ],
-          "document_filter": [
-            {
-              "data_selector": {
-                "by_query_selector": "#addFile"
-              },
-              "not_equal": null
+              "equal": 302
             }
           ],
           "event_data_selector": {
             "by_object_property": "url",
             "data_selector": {
               "by_regex": {
-                "regex": "Index\/([1-9]+)$",
+                "regex": "accountId=([a-z0-9-]*)(&|$)",
                 "match_number": 0,
                 "group_number": 0
               }
             }
           }
         }
-      }
+      ],
+      "logout_success": [
+        {
+          "data_event_type": "on_request_event",
+          "url_pattern": "https://moodle.tsu.ru/login/logout.php?sesskey=*",
+          "event": "onBeforeRedirect",
+          "event_filter": [
+            {
+              "data_selector": {
+                "by_object_property": "method"
+              },
+              "equal": "GET"
+            },
+            {
+              "data_selector": {
+                "by_object_property": "statusCode"
+              },
+              "equal": 303
+            }
+          ],
+          "event_data_selector": {
+            "by_const": true
+          }
+        }
+      ]
     }
   ]
 }
