@@ -8,6 +8,8 @@ from .managers import CustomUserManager
 class School(models.Model):
     name = models.CharField(max_length=50, verbose_name='School name')
     short_name = models.CharField(max_length=10, verbose_name="Short name")
+    name_nationalized = models.CharField(max_length=50, verbose_name='Nationalized name')
+    short_name_nationalized = models.CharField(max_length=10, verbose_name="Short Nationalized name")
 
     def __str__(self):
         return self.short_name
@@ -19,7 +21,7 @@ class School(models.Model):
 
 class User(AbstractBaseUser, PermissionsMixin):
     school = models.ForeignKey(School, on_delete=models.CASCADE, null=True)
-    user_school_id = models.IntegerField(default=0)
+    user_school_id = models.CharField(max_length=40, verbose_name="User's school id")
     login = models.CharField(max_length=120, verbose_name="User school login")
     password = models.CharField(max_length=120, verbose_name="User school password")
     is_staff = models.BooleanField(default=False)

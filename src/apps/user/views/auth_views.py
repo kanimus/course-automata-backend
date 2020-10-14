@@ -26,7 +26,7 @@ class LoginView(ObtainAuthToken):
 
     permission_classes = [AllowAny]
 
-    @swagger_auto_schema(request_body=UserSerializer, responses={201: "OK"})
+    @swagger_auto_schema(request_body=UserSerializer, responses={201: "OK"}, security=[])
     def post(self, request, *args, **kwargs):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):

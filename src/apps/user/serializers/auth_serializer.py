@@ -5,7 +5,7 @@ from apps.user.models import User
 
 class UserSerializer(serializers.Serializer):
     google_id = serializers.IntegerField(required=False)
-    school_id = serializers.IntegerField(required=True)
+    school_id = serializers.CharField(required=True)
     login = serializers.CharField(required=True)
     user_school_id = serializers.IntegerField(required=True)
 

@@ -4,5 +4,4 @@ venv
 *.sqlite3
 __pycache__/
 src/config/settings/config.py
-settings1.py
-migrations/
+
