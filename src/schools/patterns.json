@@ -1,12 +1,1 @@
-[
-  {
-    "id": 1,
-    "url_pattern": "https://accounts.tsu.ru/Account/Login*",
-    "school_id": 1
-  },
-  {
-    "id": 2,
-    "url_pattern": "https://moodle.tsu.ru/login/index.php",
-    "school_id": 1
-  }
-]
+[{"id":1,"url_pattern":"https://accounts.tsu.ru/Account/Login*","school_id":1},{"id":2,"url_pattern":"https://moodle.tsu.ru/login/index.php","school_id":1}]
