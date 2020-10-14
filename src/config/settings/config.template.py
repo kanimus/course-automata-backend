@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SCHOOLS_DIR = os.path.join(os.path.split(BASE_DIR)[0], 'schools')
 PATTERNS_DIR = os.path.join(SCHOOLS_DIR, 'patterns.json')
 
-DEBUG = False
+DEBUG = get_env_or_default('DEBUG', 'False')
 SECRET_KEY = get_random_secret_key()
 ALLOWED_HOSTS = ['*']
 
