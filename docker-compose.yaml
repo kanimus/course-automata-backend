@@ -1,12 +1,16 @@
 version: '3'
 services:
-    server:
+    web:
         build:
             context: ./
             dockerfile: ./Dockerfile
-        command: bash ./start.sh
-        ports:
-            - 80:8000
+        command: bash ./start.dev.sh
+        networks:
+            - webnet
+        expose:
+            - 8000
+        # ports:
+        #     - 8000:8000
         depends_on:
             - db
         environment:
@@ -20,6 +24,20 @@ services:
 
     db:
         image: postgres:11.2
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data
+        networks: 
+            - webnet
         environment:
             POSTGRES_DB: postgres
             POSTGRES_USER: postgres
+    nginx:
+        build: ./nginx
+        networks:
+            - webnet
+        ports:
+            - 80:80
+        depends_on:
+            - web
+networks:
+    webnet:
