@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.user.exceptions import ServerError
-from apps.user.helpers.config_helper import get_patterns_or_none, get_school_config_or_none
+from apps.user.utils.config_utils import get_patterns_or_none, get_school_config_or_none
 from apps.user.models import School
 from apps.user.serializers import SchoolSerializer
 

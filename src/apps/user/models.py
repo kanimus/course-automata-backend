@@ -12,7 +12,7 @@ class School(models.Model):
     short_name_nationalized = models.CharField(max_length=10, verbose_name="Short Nationalized name")
 
     def __str__(self):
-        return self.short_name
+        return f"{self.id} {self.short_name}"
 
     class Meta:
         verbose_name = 'School'
@@ -43,7 +43,6 @@ class Auth(models.Model):
     user_school_id = models.CharField(max_length=40, verbose_name="User's school id")
     login = models.CharField(max_length=120, verbose_name="User school login")
     password = models.CharField(max_length=120, verbose_name="User school password")
-    isAuthenticated = models.BooleanField(default=True)  # To default token already created for user
 
     def __str__(self):
         return self.login

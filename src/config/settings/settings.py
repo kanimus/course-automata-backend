@@ -79,9 +79,10 @@ DATABASES = {
 REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'apps.user.authentication.TokenAuthSupportCookie',
+        # 'apps.user.authentication.TokenAuthSupportCookie',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'apps.user.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -146,3 +147,4 @@ STATICFILES_DIRS = (
 )
 
 
+SECRET_KEY = 'sdlfkjsdakljf324'

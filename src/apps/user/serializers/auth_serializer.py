@@ -14,6 +14,7 @@ class AuthSerializer(serializers.Serializer):
                                    user_school_id=validated_data.get('user_school_id'),
                                    school_id=validated_data.get('school_id'),
                                    password=make_password(validated_data.get('password')),
+                                   user=validated_data.get('user'),
                                    )
         auth.save()
         # google_id = validated_data.get('google_id', None)
