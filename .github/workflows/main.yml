@@ -27,4 +27,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Run server
-        run: ./start_docker.sh
+        run: sh ./start_docker.sh
