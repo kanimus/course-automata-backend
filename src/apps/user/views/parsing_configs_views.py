@@ -6,15 +6,15 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from apps.user.exceptions import ServerError
-from apps.user.utils.config_utils import get_patterns_or_none, get_school_config_or_none
 from apps.user.models import School
 from apps.user.serializers import SchoolSerializer
+from apps.user.utils.config_utils import get_patterns_or_none, get_school_config_or_none
 
-config_settings_params = openapi.Parameter('school_id', openapi.IN_QUERY, description="school id from urls pattern", type=openapi.TYPE_INTEGER)
+config_settings_params = openapi.Parameter('school_id', openapi.IN_QUERY, description="school id from urls pattern",
+                                           type=openapi.TYPE_INTEGER)
 
 
 class UserPatternsView(APIView):
-
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(responses={200: "Json data"}, security=[])
@@ -26,7 +26,6 @@ class UserPatternsView(APIView):
 
 
 class ConfigSettingsView(APIView):
-
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(manual_parameters=[config_settings_params], responses={200: "Json data"}, security=[])
@@ -41,7 +40,6 @@ class ConfigSettingsView(APIView):
 
 
 class GetSchoolDataView(APIView):
-
     permission_classes = [AllowAny]
 
     @swagger_auto_schema(manual_parameters=[config_settings_params], responses={200: SchoolSerializer}, security=[])

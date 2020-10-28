@@ -6,6 +6,7 @@ from .managers import CustomUserManager
 
 
 class School(models.Model):
+    id = models.IntegerField(primary_key=True, verbose_name='ID')
     name = models.CharField(max_length=50, verbose_name='School name')
     short_name = models.CharField(max_length=10, verbose_name="Short name")
     name_nationalized = models.CharField(max_length=50, verbose_name='Nationalized name')
@@ -20,7 +21,6 @@ class School(models.Model):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-
     google_id = models.IntegerField(null=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -50,5 +50,3 @@ class Auth(models.Model):
     class Meta:
         verbose_name = 'Auth'
         verbose_name_plural = 'Auths'
-
-

@@ -19,7 +19,7 @@ def get_patterns_or_none():
 
 
 def get_school_config_or_none(school_id):
-    school =  School.objects.filter(id=school_id).first()
+    school = School.objects.filter(id=school_id).first()
     if not school:
         return None
     dir = os.path.join(SCHOOLS_DIR, school.short_name, 'config.json')
