@@ -1,4 +1,4 @@
-from apps.user.models import School, User, Auth
+from apps.user.models import School, Auth
 
 
 def is_school_exist(school_id):

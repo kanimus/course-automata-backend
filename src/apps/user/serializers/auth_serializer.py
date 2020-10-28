@@ -1,5 +1,6 @@
-from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
+from rest_framework import serializers
+
 from apps.user.models import Auth
 
 
@@ -7,13 +8,14 @@ class AuthSerializer(serializers.Serializer):
     google_id = serializers.IntegerField(required=False)
     school_id = serializers.CharField(required=True)
     login = serializers.CharField(required=True)
-    user_school_id = serializers.IntegerField(required=True)
+    user_school_id = serializers.CharField(required=True)
 
     def create(self, validated_data):
         auth = Auth.objects.create(login=validated_data.get('login'),
                                    user_school_id=validated_data.get('user_school_id'),
                                    school_id=validated_data.get('school_id'),
                                    password=make_password(validated_data.get('password')),
+                                   user=validated_data.get('user'),
                                    )
         auth.save()
         # google_id = validated_data.get('google_id', None)

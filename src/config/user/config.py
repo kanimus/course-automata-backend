@@ -1,2 +1,7 @@
 TOKEN_AUTH = 'token'
 SECURE_COOKIE = False
+JWT_KEY = 'sdlfkjsdakljf324'
+JWT_EXPIRATION_TIME = 2  # In days
+SCHOOL_HEADER = 'SCHOOL'
+COOKIE_EXPIRATION_TIME = 60 * 60 * 24  # In days
+

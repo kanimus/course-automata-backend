@@ -5,8 +5,8 @@ services:
             context: ./
             dockerfile: ./Dockerfile
         command: bash ./start.dev.sh
-        networks:
-            - webnet
+        #networks:
+            #- webnet
         expose:
             - 8000
         # ports:
@@ -26,18 +26,19 @@ services:
         image: postgres:11.2
         volumes:
             - ./pgdata:/var/lib/postgresql/data
-        networks: 
-            - webnet
+        #networks: 
+            #- webnet
         environment:
             POSTGRES_DB: postgres
             POSTGRES_USER: postgres
     nginx:
         build: ./nginx
-        networks:
-            - webnet
+        #networks:
+            #- webnet
         ports:
             - 80:80
+            - 443:443
         depends_on:
             - web
-networks:
-    webnet:
+#networks:
+    #webnet:
