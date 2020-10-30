@@ -31,6 +31,9 @@ services:
 
     nginx:
         build: ./nginx
+        user: "${UID_GID}"
+        volumes:
+            - ./nginx/ssl:/etc/nginx:z
         restart: always
         ports:
             - 80:80
