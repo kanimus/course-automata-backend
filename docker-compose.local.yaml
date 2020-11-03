@@ -1,0 +1,30 @@
+version: '3'
+services:
+
+    web:
+        build:
+            context: ./
+            dockerfile: ./Dockerfile
+        command: bash -c "sleep 10 && python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+        restart: always
+        ports:
+            - 80:8000
+        depends_on:
+            - db
+        environment:
+            DEBUG: 'True'
+            NAME_DB: postgres
+            USER_NAME: postgres
+            USER_PW: postgres
+            HOST: db
+            PORT: 5432
+
+    db:
+        image: postgres:11.2
+        # user: "${UID_GID}" # Needs set current user or existing user!!!
+        volumes:
+            - ./pgdata:/var/lib/postgresql/data
+        restart: always
+        environment:
+            POSTGRES_DB: postgres
+            POSTGRES_USER: postgres
