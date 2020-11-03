@@ -56,4 +56,4 @@ jobs:
           key: ${{ secrets.AWS_KEY }}
           script: |
             cd coursehelper
-            sh ./run.dev.sh
+            sh ./run.prod.sh
