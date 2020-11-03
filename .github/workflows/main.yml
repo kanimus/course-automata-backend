@@ -32,8 +32,8 @@ jobs:
           password: ${{ secrets.KRCITY_PASSWORD }}
           port: ${{ secrets.KRCITY_PORT }}
           script: |
-          cd coursehelper
-          sh run.dev.sh
+            cd coursehelper
+            sh ./run.dev.sh
   # build_prod:
     
   #   runs-on: [self-hosted, AWS]
