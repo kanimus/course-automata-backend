@@ -22,7 +22,6 @@ jobs:
           port: ${{ secrets.KRCITY_PORT }}
           source: "*"
           target: "coursehelper"
-        # run: sh ./run.dev.sh
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
