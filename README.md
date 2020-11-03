@@ -1,4 +1,4 @@
-# Coursehelper back #
+# Coursehelper backend #
 
 ## How to run prod ##
 1) Go to work directory.
