@@ -31,7 +31,9 @@ jobs:
           username: ${{ secrets.KRCITY_USERNAME }}
           password: ${{ secrets.KRCITY_PASSWORD }}
           port: ${{ secrets.KRCITY_PORT }}
-          script: sh run.dev.sh
+          script: |
+          cd coursehelper
+          sh run.dev.sh
   # build_prod:
     
   #   runs-on: [self-hosted, AWS]
