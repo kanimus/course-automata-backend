@@ -8,19 +8,37 @@ on:
 jobs:
 
   build_dev:
-
-    runs-on: [self-hosted, krcity]
+    runs-on: ubuntu-latest
+    # runs-on: [self-hosted, krcity]
     steps:
       
       - uses: actions/checkout@v2
-      - name: Run server
-        run: sh ./run.dev.sh
+      - name: Copy files to remote server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.KRCITY_HOST }}
+          username: ${{ secrets.KRCITY_USERNAME }}
+          password: ${{ secrets.KRCITY_PASSWORD }}
+          port: ${{ secrets.KRCITY_PORT }}
+          source: "*"
+          target: "coursehelper"
+        # run: sh ./run.dev.sh
 
-  build_prod:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.KRCITY_HOST }}
+          username: ${{ secrets.KRCITY_USERNAME }}
+          password: ${{ secrets.KRCITY_PASSWORD }}
+          port: ${{ secrets.KRCITY_PORT }}
+          script: |
+            whoiam
+            ls -al
+  # build_prod:
     
-    runs-on: [self-hosted, AWS]
-    steps:
+  #   runs-on: [self-hosted, AWS]
+  #   steps:
 
-      - uses: actions/checkout@v2
-      - name: Run server
-        run: sh ./run.prod.sh
+  #     - uses: actions/checkout@v2
+  #     - name: Run server
+  #       run: sh ./run.prod.sh
